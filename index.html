@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<h2>注册</h2>
+			<p>账号：<input type="text" id="zczh"/></p>
+			<p>密码：<input type="text" / id="zcmm"></p>
+			<p><button id="zhuce">确定</button></p>
+		</div>
+		<div>
+			<h2>登录</h2>
+			<p>账号：<input type="text" / id="dlzh"></p>
+			<p>密码：<input type="text" / id="dlmm"></p>
+			<p><button id="denglu">确定</button></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		zhuce.onclick=function(){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8000/users/zc",
+				data:{
+					user:zczh.value,
+					pass:zcmm.value
+				},
+				success(data){
+					console.log(data)
+				}
+			});
+		}
+		
+		denglu.onclick=function(){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8000/users/dl",
+				data:{
+					duser:dlzh.value,
+					dpass:dlmm.value
+				},
+				success(data){
+					if (data.type==1) {
+						localStorage.a=$('#dlzh').val();
+						location.href='user.html'
+					} else{
+						alert('用户名或密码错误')
+					}
+				}
+			});
+		}
+		
+		
+		
+	</script>
+</html>
